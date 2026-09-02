@@ -1,5 +1,23 @@
 # Contributing to `tree-sitter-zig-spm`
 
+## Scope
+
+This repository is a packaging wrapper, not a product. It exists so Swift
+projects can depend on the upstream Zig tree-sitter grammar without running
+`tree-sitter-cli` at build time. It contains no original grammar work.
+
+**External contributions are not accepted here.** Grammar behavior belongs to
+the upstream project at
+<https://github.com/tree-sitter-grammars/tree-sitter-zig>.
+Send grammar fixes there, where they reach every consumer instead of this
+wrapper alone.
+
+Packaging faults are in scope, and you can open an issue on this repository for
+them: a build that fails, a missing exported symbol, or a `Package.swift`
+source list that does not match the vendored files. Report a security problem
+through [`.github/SECURITY.md`](.github/SECURITY.md) rather than a public
+issue.
+
 This repo is a thin **Swift Package Manager wrapper** around the
 [`tree-sitter-zig`](https://github.com/tree-sitter-grammars/tree-sitter-zig) tree-sitter grammar. The generated parser
 (`Sources/TreeSitterZig/src/parser.c` and any `scanner.c`) is **vendored** so
@@ -70,3 +88,20 @@ step-by-step re-vendor procedure. In short:
 Found malicious code in a vendored `parser.c`, a `Package.swift` escape, or a
 CI bypass? Do **not** open a public issue — follow
 [`.github/SECURITY.md`](.github/SECURITY.md).
+
+## Pull request titles
+
+Title every pull request `[Area] Sentence case`. The area is one bracketed word
+naming the part you touched, and the sentence that follows says what the change
+does, capitalized like a sentence and with no trailing period.
+
+```
+[Grammar] Re-vendor the parser from upstream a1b2c3d
+[CI] Pin the checkout action to a release SHA
+[Docs] Correct the exported symbol check
+```
+
+Common areas here are `Grammar`, `Packaging`, `CI`, and `Docs`. Describe the
+change in three to five sentences in the body, and say which command you ran to
+verify it. [`.github/pull_request_template.md`](.github/pull_request_template.md)
+prompts for both.
