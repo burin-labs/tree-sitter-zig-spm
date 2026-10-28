@@ -9,6 +9,7 @@ let package = Package(
             name: "TreeSitterZig",
             path: "Sources/TreeSitterZig",
             sources: ["src/parser.c"],
+            resources: [.copy("queries")],
             publicHeadersPath: "include",
             cSettings: [.headerSearchPath("src")]
         )
